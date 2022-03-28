@@ -46,6 +46,8 @@
 #include "Gameplay/Components/CharacterController.h"
 #include "Gameplay/Components/BeatTimer.h"
 #include "Gameplay/Components/BeatGem.h"
+#include "Gameplay/Components/MaterialSwap.h"
+#include "Gameplay/Components/MaterialSwapBehaviour.h"
 // GUI
 #include "Gameplay/Components/GUI/RectTransform.h"
 #include "Gameplay/Components/GUI/GuiPanel.h"
@@ -277,6 +279,8 @@ void Application::_RegisterClasses()
 	ComponentManager::RegisterType<CharacterController>();
 	ComponentManager::RegisterType<BeatTimer>();
 	ComponentManager::RegisterType<BeatGem>();
+	ComponentManager::RegisterType<MaterialSwap>();
+	ComponentManager::RegisterType<MaterialSwapBehaviour>();
 }
 
 void Application::_Load() {

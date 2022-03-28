@@ -99,7 +99,7 @@ void CharacterController::OnEnteredTrigger(const std::shared_ptr<Gameplay::Physi
     std::string stringScore;
     ss >> stringScore;
 
-    GetGameObject()->GetScene()->FindObjectByName("HUD Score Text")->Get<GuiText>()->SetText(stringScore);
+   // GetGameObject()->GetScene()->FindObjectByName("HUD Score Text")->Get<GuiText>()->SetText(stringScore);
 
 }
 

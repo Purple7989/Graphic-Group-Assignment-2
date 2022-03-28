@@ -52,6 +52,8 @@
 #include "Gameplay/Components/CharacterController.h"
 #include"Gameplay/Components/BeatTimer.h"
 #include "Gameplay/Components/BeatGem.h"
+#include "Gameplay/Components/MaterialSwap.h"
+#include "Gameplay/Components/MaterialSwapBehaviour.h"
 // Physics
 #include "Gameplay/Physics/RigidBody.h"
 #include "Gameplay/Physics/Colliders/BoxCollider.h"
@@ -166,8 +168,8 @@ void DefaultSceneLayer::SpawnGem(Gameplay::Scene::Sptr scene, Gameplay::MeshReso
 		//Add Components
 		//Gem->Add<LevelMover>();
 		Gem->Add<RotatingBehaviour>();
-		//Gem->Add<MaterialSwap>(BeatNum);
-		//Gem->Add <BeatGem>(BeatNum);
+		Gem->Add<MaterialSwap>(BeatNum);
+		Gem->Add <BeatGem>(BeatNum);
 		// Create and attach a renderer for the Object
 		RenderComponent::Sptr renderer = Gem->Add<RenderComponent>();
 		renderer->SetMesh(Mesh);
@@ -1191,6 +1193,29 @@ void DefaultSceneLayer::_CreateScene()
 		MeshResource::Sptr sphere = ResourceManager::CreateAsset<MeshResource>();
 		sphere->AddParam(MeshBuilderParam::CreateIcoSphere(ZERO, ONE, 5));
 		sphere->GenerateMesh();
+
+		{
+			GameObject::Sptr MaterialDummyOn = scene->CreateGameObject("Material Dummy On");
+			RenderComponent::Sptr renderer = MaterialDummyOn->Add<RenderComponent>();
+			renderer->SetMesh(BeatGem);
+			renderer->SetMaterial(BeatGemMaterial);
+			renderer->IsEnabled = false;
+		}
+		{
+			GameObject::Sptr MaterialDummyOff = scene->CreateGameObject("Material Dummy Off");
+			RenderComponent::Sptr renderer = MaterialDummyOff->Add<RenderComponent>();
+			renderer->SetMesh(BeatGem);
+			renderer->SetMaterial(BeatGemOffMaterial);
+			renderer->IsEnabled = false;
+		}
+		{
+			GameObject::Sptr MaterialDummyAnticipation = scene->CreateGameObject("MaterialDummyAnticipation");
+			RenderComponent::Sptr renderer = MaterialDummyAnticipation->Add<RenderComponent>();
+			renderer->SetMesh(BeatGem);
+			renderer->SetMaterial(BeatGemAnticipationMaterial);
+			renderer->IsEnabled = false;
+		}
+
 
 		GameObject::Sptr GameManager = scene->CreateGameObject("GameManager");
 		{
