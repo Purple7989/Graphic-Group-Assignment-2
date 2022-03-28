@@ -219,7 +219,7 @@ void CharacterController::Update(float deltaTime) {
     }
  
     if ((!_A) && (!_D) && (!_W) && (_PlatformName != "") && (_PlatformName != "BeatGem")) {
-        _body->SetLinearVelocity(glm::vec3(-1.0f, 0.0f, 0.0f));
+        _body->SetLinearVelocity(glm::vec3(0.0f, 0.0f, 0.0f));
     }
 
     GetGameObject()->SetPostion({ CurrentPosition.x, 5.61f, CurrentPosition.z });

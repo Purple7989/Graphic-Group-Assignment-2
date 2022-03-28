@@ -43,7 +43,9 @@
 #include "Gameplay/Components/SimpleCameraControl.h"
 #include "Gameplay/Components/ParticleSystem.h"
 #include "Gameplay/Components/Light.h"
-
+#include "Gameplay/Components/CharacterController.h"
+#include "Gameplay/Components/BeatTimer.h"
+#include "Gameplay/Components/BeatGem.h"
 // GUI
 #include "Gameplay/Components/GUI/RectTransform.h"
 #include "Gameplay/Components/GUI/GuiPanel.h"
@@ -272,6 +274,9 @@ void Application::_RegisterClasses()
 	ComponentManager::RegisterType<GuiText>();
 	ComponentManager::RegisterType<ParticleSystem>();
 	ComponentManager::RegisterType<Light>();
+	ComponentManager::RegisterType<CharacterController>();
+	ComponentManager::RegisterType<BeatTimer>();
+	ComponentManager::RegisterType<BeatGem>();
 }
 
 void Application::_Load() {

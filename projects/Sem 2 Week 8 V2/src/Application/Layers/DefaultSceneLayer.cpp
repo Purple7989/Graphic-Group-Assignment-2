@@ -49,7 +49,9 @@
 #include "Gameplay/Components/MaterialSwapBehaviour.h"
 #include "Gameplay/Components/TriggerVolumeEnterBehaviour.h"
 #include "Gameplay/Components/SimpleCameraControl.h"
-
+#include "Gameplay/Components/CharacterController.h"
+#include"Gameplay/Components/BeatTimer.h"
+#include "Gameplay/Components/BeatGem.h"
 // Physics
 #include "Gameplay/Physics/RigidBody.h"
 #include "Gameplay/Physics/Colliders/BoxCollider.h"
@@ -107,7 +109,7 @@ void DefaultSceneLayer::SpawnObj(Gameplay::Scene::Sptr scene, Gameplay::MeshReso
 		renderer->SetMaterial(Material);
 
 		// Add a dynamic rigid body to this monkey
-		RigidBody::Sptr physics = Startplatform->Add<RigidBody>(RigidBodyType::Kinematic);
+		RigidBody::Sptr physics = Startplatform->Add<RigidBody>(RigidBodyType::Static);
 		//physics->AddCollider(BoxCollider::Create(glm::vec3(1.0f, 1.0f, 1.0f)));
 
 
@@ -143,7 +145,7 @@ void DefaultSceneLayer::SpawnStartPlat(Gameplay::Scene::Sptr scene, Gameplay::Me
 		renderer->SetMaterial(Material);
 
 		// Add a dynamic rigid body to this object
-		RigidBody::Sptr physics = Startplatform->Add<RigidBody>(RigidBodyType::Kinematic);
+		RigidBody::Sptr physics = Startplatform->Add<RigidBody>(RigidBodyType::Static);
 		physics->AddCollider(BoxCollider::Create(glm::vec3(1.8f, 1.0f, 1.0f)))->SetPosition({ 0,5,0 });;
 	}
 }
@@ -267,7 +269,7 @@ void DefaultSceneLayer::SpawnWallJump(Gameplay::Scene::Sptr scene, Gameplay::Mes
 		renderer->SetMaterial(Material);
 
 		// Add a dynamic rigid body to this object
-		RigidBody::Sptr physics = WallJump->Add<RigidBody>(RigidBodyType::Kinematic);
+		RigidBody::Sptr physics = WallJump->Add<RigidBody>(RigidBodyType::Static);
 		// For Wall Jump Colliders, X = Left/Right Y = towards/away, z = Up/Down
 		ICollider::Sptr CollectCollider = physics->AddCollider(BoxCollider::Create(glm::vec3(0.3f, 0.5f, 3.2f)));
 		CollectCollider->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
@@ -295,7 +297,7 @@ void DefaultSceneLayer::SpawnBuilding(Gameplay::Scene::Sptr scene, Gameplay::Mes
 		renderer->SetMaterial(Material);
 
 		// Add a dynamic rigid body to this object
-		RigidBody::Sptr physics = Building->Add<RigidBody>(RigidBodyType::Kinematic);
+		RigidBody::Sptr physics = Building->Add<RigidBody>(RigidBodyType::Static);
 		// For Wall Jump Colliders, X = Left/Right Y = towards/away, z = Up/Down
 		ICollider::Sptr CollectCollider = physics->AddCollider(BoxCollider::Create(glm::vec3(1.590f, 6.250f, 1.800f)));
 		CollectCollider->SetPosition(glm::vec3(-0.020f, 0.110f, -0.010f));
@@ -323,7 +325,7 @@ void DefaultSceneLayer::SpawnBuilding2(Gameplay::Scene::Sptr scene, Gameplay::Me
 		renderer->SetMaterial(Material);
 
 		// Add a dynamic rigid body to this object
-		RigidBody::Sptr physics = Building2->Add<RigidBody>(RigidBodyType::Kinematic);
+		RigidBody::Sptr physics = Building2->Add<RigidBody>(RigidBodyType::Static);
 		// For Wall Jump Colliders, X = Left/Right Y = towards/away, z = Up/Down
 		ICollider::Sptr CollectCollider = physics->AddCollider(BoxCollider::Create(glm::vec3(1.700f, 3.500f, 2.000f)));
 		CollectCollider->SetPosition(glm::vec3(0.570f, -3.230f, 1.150f));
@@ -351,7 +353,7 @@ void DefaultSceneLayer::SpawnBuilding3(Gameplay::Scene::Sptr scene, Gameplay::Me
 		renderer->SetMaterial(Material);
 
 		// Add a dynamic rigid body to this object
-		RigidBody::Sptr physics = Building3->Add<RigidBody>(RigidBodyType::Kinematic);
+		RigidBody::Sptr physics = Building3->Add<RigidBody>(RigidBodyType::Static);
 		// For Wall Jump Colliders, X = Left/Right Y = towards/away, z = Up/Down
 		ICollider::Sptr CollectCollider = physics->AddCollider(BoxCollider::Create(glm::vec3(1.500f, 4.800f, 1.700f)));
 		CollectCollider->SetPosition(glm::vec3(-0.040f, -0.990f, 0.000f));
@@ -380,7 +382,7 @@ void DefaultSceneLayer::SpawnSmallWallJump(Gameplay::Scene::Sptr scene, Gameplay
 		renderer->SetMaterial(Material);
 
 		// Add a dynamic rigid body to this object
-		RigidBody::Sptr physics = SmallWallJump->Add<RigidBody>(RigidBodyType::Kinematic);
+		RigidBody::Sptr physics = SmallWallJump->Add<RigidBody>(RigidBodyType::Static);
 		// For Wall Jump Colliders, X = Left/Right Y = towards/away, z = Up/Down
 		ICollider::Sptr CollectCollider = physics->AddCollider(BoxCollider::Create(glm::vec3(0.3f, 0.5f, 2.5f)));
 		CollectCollider->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
@@ -408,7 +410,7 @@ void DefaultSceneLayer::SpawnSuperSmallWallJump(Gameplay::Scene::Sptr scene, Gam
 		renderer->SetMaterial(Material);
 
 		// Add a dynamic rigid body to this object
-		RigidBody::Sptr physics = SuperSmallWallJump->Add<RigidBody>(RigidBodyType::Kinematic);
+		RigidBody::Sptr physics = SuperSmallWallJump->Add<RigidBody>(RigidBodyType::Static);
 		// For Wall Jump Colliders, X = Left/Right Y = towards/away, z = Up/Down
 		ICollider::Sptr CollectCollider = physics->AddCollider(BoxCollider::Create(glm::vec3(0.100f, 0.200f, 0.800f)));
 		CollectCollider->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
@@ -436,7 +438,7 @@ void DefaultSceneLayer::SpawnStairsRight(Gameplay::Scene::Sptr scene, Gameplay::
 		renderer->SetMaterial(Material);
 
 		// Add a dynamic rigid body to this object
-		RigidBody::Sptr physics = StairsRight->Add<RigidBody>(RigidBodyType::Kinematic);
+		RigidBody::Sptr physics = StairsRight->Add<RigidBody>(RigidBodyType::Static);
 		// For Wall Jump Colliders, X = Left/Right Y = towards/away, z = Up/Down
 		ICollider::Sptr CollectCollider = physics->AddCollider(BoxCollider::Create(glm::vec3(0.100f, 0.200f, 0.800f)));
 		CollectCollider->SetPosition(glm::vec3(-0.120f, 0.460f, 1.030f));
@@ -466,7 +468,7 @@ void DefaultSceneLayer::SpawnStairsLeft(Gameplay::Scene::Sptr scene, Gameplay::M
 		renderer->SetMaterial(Material);
 
 		// Add a dynamic rigid body to this object
-		RigidBody::Sptr physics = StairsLeft->Add<RigidBody>(RigidBodyType::Kinematic);
+		RigidBody::Sptr physics = StairsLeft->Add<RigidBody>(RigidBodyType::Static);
 		// For Wall Jump Colliders, X = Left/Right Y = towards/away, z = Up/Down
 		ICollider::Sptr CollectCollider = physics->AddCollider(BoxCollider::Create(glm::vec3(0.100f, 0.200f, 0.800f)));
 		CollectCollider->SetPosition(glm::vec3(-0.120f, 0.460f, 1.030f));
@@ -518,7 +520,7 @@ void DefaultSceneLayer::SpawnSquarePlat(Gameplay::Scene::Sptr scene, Gameplay::M
 		renderer->SetMaterial(Material);
 
 		// Add a dynamic rigid body to this object
-		RigidBody::Sptr physics = SquarePlat->Add<RigidBody>(RigidBodyType::Kinematic);
+		RigidBody::Sptr physics = SquarePlat->Add<RigidBody>(RigidBodyType::Static);
 		// For Wall Jump Colliders, X = Left/Right Y = towards/away, z = Up/Down
 		ICollider::Sptr CollectCollider = physics->AddCollider(BoxCollider::Create(glm::vec3(0.100f, 0.200f, 0.800f)));
 		CollectCollider->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
@@ -1190,6 +1192,76 @@ void DefaultSceneLayer::_CreateScene()
 		sphere->AddParam(MeshBuilderParam::CreateIcoSphere(ZERO, ONE, 5));
 		sphere->GenerateMesh();
 
+		GameObject::Sptr GameManager = scene->CreateGameObject("GameManager");
+		{
+			//Pos-Rot-Scale Doesn't matter
+			//RigidBody::Sptr physics = GameManager->Add<RigidBody>(RigidBodyType::Kinematic);
+			GameManager->Add<BeatTimer>();
+			//GameManager->Add<SpawnLoop>();
+			//ScoreComponent
+			//LevelSpawningComponent
+			//Scene Swapper
+		}
+		// Player:
+		GameObject::Sptr character = scene->CreateGameObject("Character/Player");
+		{
+			// Set position in the scene
+			character->SetPostion(glm::vec3(-16.820f, 5.710f, -3.000f));
+			character->SetRotation(glm::vec3(90.0f, 0.0f, 90.0f));
+			character->SetScale(glm::vec3(0.7f, 0.7f, 0.7f));
+
+			character->Add<CharacterController>();
+
+			// Create and attach a renderer for the paddle
+			RenderComponent::Sptr renderer = character->Add<RenderComponent>();
+			renderer->SetMesh(CharacterMesh);
+			renderer->SetMaterial(CharacterMaterial);
+
+			// Add a kinematic rigid body to the paddle
+			RigidBody::Sptr physics = character->Add<RigidBody>(RigidBodyType::Dynamic);
+			auto rb = physics->AddCollider(BoxCollider::Create(glm::vec3(0.2, 0.85, 0.15)));
+			rb->SetPosition(glm::vec3(0.0, 0.75, 0.0));
+
+			TriggerVolume::Sptr volume = character->Add<TriggerVolume>();
+			volume->SetFlags(TriggerTypeFlags::Statics | TriggerTypeFlags::Kinematics);
+
+			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(0.3f, 0.3f, 0.3f));
+			collider->SetPosition(glm::vec3(0.f, 0.25f, 0.f));
+			volume->AddCollider(collider);
+
+			//MorphRenderComponent::Sptr morph1 = character->Add<MorphRenderComponent>(CharacterMesh);
+			//MorphAnimationManager::Sptr animator = character->Add<MorphAnimationManager>();
+
+			//A vector Stores Each Animation Seperately
+			std::vector<MeshResource::Sptr> RunAnim;
+			std::vector<MeshResource::Sptr> JumpAnim;
+
+			RunAnim.push_back(DiscoBotMesh1);
+			RunAnim.push_back(DiscoBotMesh2);
+			RunAnim.push_back(DiscoBotMesh3);
+			RunAnim.push_back(DiscoBotMesh4);
+			RunAnim.push_back(DiscoBotMesh5);
+			RunAnim.push_back(DiscoBotMesh6);
+			RunAnim.push_back(DiscoBotMesh7);
+			RunAnim.push_back(DiscoBotMesh8);
+			RunAnim.push_back(DiscoBotMesh9);
+
+			JumpAnim.push_back(BotJump1);
+			JumpAnim.push_back(BotJump2);
+			JumpAnim.push_back(BotJump3);
+			JumpAnim.push_back(BotJump4);
+			JumpAnim.push_back(BotJump5);
+			JumpAnim.push_back(BotJump6);
+			JumpAnim.push_back(BotJump7);
+
+			//animator->AddAnim(RunAnim, 1.00);
+			//animator->AddAnim(JumpAnim, 0.25);
+			//animator->SetContinuity(true);
+			//animator->SetCurrentAnim(0);
+
+
+		}
+
 		GameObject::Sptr camera = scene->MainCamera->GetGameObject()->SelfRef();
 		{
 			camera->SetPostion({ 2.280, -6, 2.830 });
@@ -1397,8 +1469,8 @@ DefaultSceneLayer::SpawnObj(scene, SmallPlatform, SmallPlatformMaterial, "Small 
 DefaultSceneLayer::SpawnObj(scene, SmallPlatform, SmallPlatformMaterial, "Small Platform", glm::vec3(-3.940f + adjustment, 5.610f, -4.150f), glm::vec3(180.0f, 0.0f, 180.0f), glm::vec3(0.350f, 0.350f, 0.350f));
 DefaultSceneLayer::SpawnObj(scene, SmallPlatform, SmallPlatformMaterial, "Small Platform", glm::vec3(2.200f + adjustment, 5.610f, -1.770f), glm::vec3(180.0f, 0.0f, 180.0f), glm::vec3(0.350f, 0.350f, 0.350f));
 DefaultSceneLayer::SpawnObj(scene, SmallPlatform, SmallPlatformMaterial, "Small Platform", glm::vec3(6.500f + adjustment, 5.610f, -4.150f), glm::vec3(180.0f, 0.0f, 180.0f), glm::vec3(0.350f, 0.350f, 0.350f));
-DefaultSceneLayer::SpawnGem(scene, BeatGem, BeatGemMaterial, BeatGemOffMaterial, "BeatGem 4", 4, glm::vec3(-0.520f + adjustment, 5.610f, -3.160f), glm::vec3(90.0f, 0.0f, 180.0f), glm::vec3(0.500f, 0.500f, 0.500f));
-DefaultSceneLayer::SpawnGem(scene, BeatGem, BeatGemMaterial, BeatGemOffMaterial, "BeatGem 4", 4, glm::vec3(-6.940f + adjustment, 5.610f, -3.160f), glm::vec3(90.0f, 0.0f, 180.0f), glm::vec3(0.500f, 0.500f, 0.500f));
+DefaultSceneLayer::SpawnGem(scene, BeatGem, BeatGemMaterial, BeatGemOffMaterial, "BeatGem", 4, glm::vec3(-0.520f + adjustment, 5.610f, -3.160f), glm::vec3(90.0f, 0.0f, 180.0f), glm::vec3(0.500f, 0.500f, 0.500f));
+DefaultSceneLayer::SpawnGem(scene, BeatGem, BeatGemMaterial, BeatGemOffMaterial, "BeatGem ", 4, glm::vec3(-6.940f + adjustment, 5.610f, -3.160f), glm::vec3(90.0f, 0.0f, 180.0f), glm::vec3(0.500f, 0.500f, 0.500f));
 DefaultSceneLayer::SpawnCollectable(scene, Vinyl, VinylMaterial, "Vinyl", glm::vec3(5.210f + adjustment, 5.610f, 0.080f), glm::vec3(90.000f, 0.0f, 90.000f), glm::vec3(1.000f, 1.000f, 1.000f));
 DefaultSceneLayer::SpawnStartPlat(scene, StartPlatform, StartPlatformMaterial, "EndPlatform", glm::vec3(9.180f + adjustment, 5.610f, -9.10f), glm::vec3(90.0f, 0.0f, 0.0f), glm::vec3(0.350f, 0.350f, 0.350f));
 
