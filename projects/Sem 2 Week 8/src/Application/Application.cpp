@@ -1,3 +1,4 @@
+#pragma once
 #include "Application/Application.h"
 
 #include <Windows.h>
@@ -34,6 +35,20 @@
 
 // Components
 #include "Gameplay/Components/IComponent.h"
+#include "Gameplay/Components/BeatTimer.h"
+#include "Gameplay/Components/SeekBehaviour.h"
+#include "Gameplay/Components/BeatGem.h"
+#include "Gameplay/Components/RotatingBehaviour.h"
+#include "Gameplay/Components/MaterialSwap.h"
+#include "Gameplay/Components/CharacterController.h"
+#include "Gameplay/Components/LevelMover.h"
+#include "Gameplay/Components/BackgroundMover.h"
+#include "Gameplay/Components/EnvironmentMover.h"
+#include "Gameplay/Components/ScoreComponent.h"
+#include "Gameplay/Components/VinylAnim.h"
+#include "Gameplay/Components/ForegroundMover.h"
+#include "Gameplay/Components/BuildingAnim.h"
+#include "Gameplay/Components/SpawnLoop.h"
 #include "Gameplay/Components/Camera.h"
 #include "Gameplay/Components/RotatingBehaviour.h"
 #include "Gameplay/Components/JumpBehaviour.h"
@@ -43,6 +58,7 @@
 #include "Gameplay/Components/SimpleCameraControl.h"
 #include "Gameplay/Components/ParticleSystem.h"
 #include "Gameplay/Components/Light.h"
+
 
 // GUI
 #include "Gameplay/Components/GUI/RectTransform.h"
@@ -59,6 +75,13 @@
 #include "Layers/InstancedRenderingTestLayer.h"
 #include "Layers/ParticleLayer.h"
 #include "Layers/PostProcessingLayer.h"
+
+//Sound
+#include "FMOD/AudioEngine.h"
+
+//Animation
+#include "Animation/MorphAnimationManager.h"
+#include "Animation/MorphRenderComponent.h"
 
 Application* Application::_singleton = nullptr;
 std::string Application::_applicationName = "INFR-2350U - DEMO";
@@ -262,7 +285,23 @@ void Application::_RegisterClasses()
 	ComponentManager::RegisterType<RenderComponent>();
 	ComponentManager::RegisterType<RigidBody>();
 	ComponentManager::RegisterType<TriggerVolume>();
+	ComponentManager::RegisterType<SeekBehaviour>();
 	ComponentManager::RegisterType<RotatingBehaviour>();
+	ComponentManager::RegisterType<RotatingBehaviourCD>();
+	ComponentManager::RegisterType<MaterialSwap>();
+	ComponentManager::RegisterType<CharacterController>();
+	ComponentManager::RegisterType<ScoreComponent>();
+	ComponentManager::RegisterType<LevelMover>();
+	ComponentManager::RegisterType<BackgroundMover>();
+	ComponentManager::RegisterType<BackgroundBuildingMover>();
+	ComponentManager::RegisterType<VinylAnim>();
+	ComponentManager::RegisterType<ForeGroundMover>();
+	ComponentManager::RegisterType<BuildingAnim>();
+	ComponentManager::RegisterType<MorphAnimationManager>();
+	ComponentManager::RegisterType<MorphRenderComponent>();
+	ComponentManager::RegisterType<SpawnLoop>();
+	ComponentManager::RegisterType<BeatGem>();
+	ComponentManager::RegisterType<BeatTimer>();
 	ComponentManager::RegisterType<JumpBehaviour>();
 	ComponentManager::RegisterType<MaterialSwapBehaviour>();
 	ComponentManager::RegisterType<TriggerVolumeEnterBehaviour>();

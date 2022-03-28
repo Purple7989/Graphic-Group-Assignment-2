@@ -249,7 +249,7 @@ void RenderLayer::_AccumulateLighting()
 	const glm::mat4& view = scene->MainCamera->GetView();
 
 	// Send in how many active lights we have and the global lighting settings
-	data.AmbientCol = glm::vec3(0.1f);
+	data.AmbientCol = glm::vec3(0.8f);
 	int ix = 0;
 	app.CurrentScene()->Components().Each<Light>([&](const Light::Sptr& light) {
 		// Get the light's position in view space, since we're doing view space lighting

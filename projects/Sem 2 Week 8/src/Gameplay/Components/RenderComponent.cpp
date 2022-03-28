@@ -20,6 +20,10 @@ void RenderComponent::SetMesh(const Gameplay::MeshResource::Sptr& mesh) {
 	_mesh = mesh;
 }
 
+void RenderComponent::SetVAO(VertexArrayObject::Sptr vao) {
+	_mesh->Mesh = vao;
+}
+
 const Gameplay::MeshResource::Sptr& RenderComponent::GetMeshResource() const {
 	return _mesh;
 }
@@ -27,6 +31,7 @@ const Gameplay::MeshResource::Sptr& RenderComponent::GetMeshResource() const {
 VertexArrayObject::Sptr RenderComponent::GetMesh() const {
 	return _mesh ? _mesh->Mesh : nullptr;
 }
+
 
 void RenderComponent::SetMaterial(const Gameplay::Material::Sptr& mat) {
 	_material = mat;

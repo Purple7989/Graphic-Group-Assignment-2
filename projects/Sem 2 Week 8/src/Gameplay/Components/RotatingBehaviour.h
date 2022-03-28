@@ -9,7 +9,10 @@ public:
 	typedef std::shared_ptr<RotatingBehaviour> Sptr;
 
 	RotatingBehaviour() = default;
-	glm::vec3 RotationSpeed;
+	glm::vec3 RotationSpeed = glm::vec3(0, 0, 30);
+
+	glm::vec3 GetRotationSpeed();
+	void SetRotationSpeed(glm::vec3 value);
 
 	virtual void Update(float deltaTime) override;
 
@@ -20,4 +23,26 @@ public:
 
 	MAKE_TYPENAME(RotatingBehaviour);
 };
+
+
+// ROTATION BEHAVIOURS FOR THE CDs
+class RotatingBehaviourCD : public Gameplay::IComponent {
+public:
+	typedef std::shared_ptr<RotatingBehaviourCD> Sptr;
+
+	RotatingBehaviourCD() = default;
+	glm::vec3 RotationCDSpeed = glm::vec3(0, 0, 60);
+
+	virtual void Update(float deltaTime) override;
+
+	virtual void RenderImGui() override;
+
+	virtual nlohmann::json ToJson() const override;
+	static RotatingBehaviourCD::Sptr FromJson(const nlohmann::json& data);
+
+	MAKE_TYPENAME(RotatingBehaviourCD);
+};
+
+
+
 
