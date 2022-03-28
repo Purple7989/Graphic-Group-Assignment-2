@@ -563,21 +563,17 @@ void DefaultSceneLayer::_CreateScene()
 			OvalBuildingMaterial->Set("u_Material.Shininess", 0.1f);
 		}
 
-		// Set up the scene's camera
-		GameObject::Sptr camera = scene->CreateGameObject("Main Camera");
+		GameObject::Sptr camera = scene->MainCamera->GetGameObject()->SelfRef();
 		{
-			camera->SetPostion(glm::vec3(-1.410, -3.500, 2.450));
+			camera->SetPostion({ -9, -6, 15 });
 			camera->LookAt(glm::vec3(0.0f));
-			camera->SetRotation(glm::vec3(-103, 180, -180));
 
-			Camera::Sptr cam = camera->Add<Camera>();
-			//cam->SetOrthoEnabled(true);
-			//cam->SetOrthoVerticalScale(19.0f);
-			//cam->SetFovRadians(105.f);
-			//cam->SetNearPlane(0.3);
+			camera->Add<SimpleCameraControl>();
 
+			// This is now handled by scene itself!
+			//Camera::Sptr cam = camera->Add<Camera>();
 			// Make sure that the camera is set as the scene's main camera!
-			scene->MainCamera = cam;
+			//scene->MainCamera = cam;
 		}
 
 		//This is a game object built purely to manage game systems i.e. Scene Swaps

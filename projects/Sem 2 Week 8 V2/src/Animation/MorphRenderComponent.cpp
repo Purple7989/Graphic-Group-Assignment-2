@@ -48,7 +48,7 @@ void MorphRenderComponent::UpdateVBOs(const Gameplay::MeshResource::Sptr& mesh0,
 	//GetGameObject()->Get<>()
 
 
-	GetGameObject()->Get<RenderComponent>()->SetVAO(vao);
+	//GetGameObject()->Get<RenderComponent>()->SetVAO(vao);
 }
 
 nlohmann::json MorphRenderComponent::ToJson() const {
