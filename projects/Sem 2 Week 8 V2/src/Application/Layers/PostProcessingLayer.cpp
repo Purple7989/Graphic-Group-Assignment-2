@@ -7,6 +7,8 @@
 #include "PostProcessing/BoxFilter3x3.h"
 #include "PostProcessing/BoxFilter5x5.h"
 #include "PostProcessing/OutlineEffect.h"
+#include "PostProcessing/CelShader.h"
+
 
 PostProcessingLayer::PostProcessingLayer() :
 	ApplicationLayer()
@@ -32,6 +34,7 @@ void PostProcessingLayer::OnAppLoad(const nlohmann::json& config)
 	_effects.push_back(std::make_shared<BoxFilter3x3>());
 	_effects.push_back(std::make_shared<BoxFilter5x5>());
 	_effects.push_back(std::make_shared<OutlineEffect>());
+	//_effects.push_back(std::make_shared<CelShaderEffect>());
 
 	Application& app = Application::Get();
 	const glm::uvec4& viewport = app.GetPrimaryViewport();
