@@ -957,7 +957,7 @@ void DefaultSceneLayer::_CreateScene()
 		Material::Sptr SmallPlatformMaterial = ResourceManager::CreateAsset<Material>(deferredForward);
 		{
 			SmallPlatformMaterial->Name = "SmallPlatform";
-			SmallPlatformMaterial->Set("u_Material.AlbedoMap", StartTex);
+			SmallPlatformMaterial->Set("u_Material.AlbedoMap", SmallTex);
 			SmallPlatformMaterial->Set("u_Material.NormalMap", normalMapDefault);
 			SmallPlatformMaterial->Set("u_Material.Shininess", 0.1f);
 		}
@@ -965,7 +965,7 @@ void DefaultSceneLayer::_CreateScene()
 		Material::Sptr WallJumpMaterial = ResourceManager::CreateAsset<Material>(deferredForward);
 		{
 			WallJumpMaterial->Name = "WallJump";
-			WallJumpMaterial->Set("u_Material.AlbedoMap", StartTex);
+			WallJumpMaterial->Set("u_Material.AlbedoMap", WallJumpTex);
 			WallJumpMaterial->Set("u_Material.NormalMap", normalMapDefault);
 			WallJumpMaterial->Set("u_Material.Shininess", 0.1f);
 		}
@@ -997,7 +997,7 @@ void DefaultSceneLayer::_CreateScene()
 		Material::Sptr VinylMaterial = ResourceManager::CreateAsset<Material>(deferredForward);
 		{
 			VinylMaterial->Name = "Vinyl";
-			VinylMaterial->Set("u_Material.AlbedoMap", StartTex);
+			VinylMaterial->Set("u_Material.AlbedoMap", VinylTex);
 			VinylMaterial->Set("u_Material.NormalMap", normalMapDefault);
 			VinylMaterial->Set("u_Material.Shininess", 0.1f);
 		}
@@ -1005,7 +1005,7 @@ void DefaultSceneLayer::_CreateScene()
 		Material::Sptr CDMaterial = ResourceManager::CreateAsset<Material>(deferredForward);
 		{
 			CDMaterial->Name = "CD";
-			CDMaterial->Set("u_Material.AlbedoMap", StartTex);
+			CDMaterial->Set("u_Material.AlbedoMap", CDTex);
 			CDMaterial->Set("u_Material.NormalMap", normalMapDefault);
 			CDMaterial->Set("u_Material.Shininess", 0.1f);
 		}
@@ -1014,7 +1014,7 @@ void DefaultSceneLayer::_CreateScene()
 		Material::Sptr CharacterMaterial = ResourceManager::CreateAsset<Material>(deferredForward);
 		{
 			CharacterMaterial->Name = "Character";
-			CharacterMaterial->Set("u_Material.AlbedoMap", StartTex);
+			CharacterMaterial->Set("u_Material.AlbedoMap", CharacterTex);
 			CharacterMaterial->Set("u_Material.NormalMap", normalMapDefault);
 			CharacterMaterial->Set("u_Material.Shininess", 0.1f);
 		}
@@ -1022,7 +1022,7 @@ void DefaultSceneLayer::_CreateScene()
 		Material::Sptr DiscoBallMaterial = ResourceManager::CreateAsset<Material>(deferredForward);
 		{
 			DiscoBallMaterial->Name = "DiscoBall";
-			DiscoBallMaterial->Set("u_Material.AlbedoMap", StartTex);
+			DiscoBallMaterial->Set("u_Material.AlbedoMap", DiscoBallTex);
 			DiscoBallMaterial->Set("u_Material.NormalMap", normalMapDefault);
 			DiscoBallMaterial->Set("u_Material.Shininess", 0.1f);
 		}
@@ -1339,125 +1339,8 @@ void DefaultSceneLayer::_CreateScene()
 
 			monkey1->Add<TriggerVolumeEnterBehaviour>();
 		}
-
-
-		GameObject::Sptr ship = scene->CreateGameObject("Fenrir");
-		{
-			// Set position in the scene
-			ship->SetPostion(glm::vec3(1.5f, 0.0f, 4.0f));
-			ship->SetScale(glm::vec3(0.1f));
-
-			// Create and attach a renderer for the monkey
-			RenderComponent::Sptr renderer = ship->Add<RenderComponent>();
-			renderer->SetMesh(shipMesh);
-			renderer->SetMaterial(monkeyMaterial);
-		}
-
-		GameObject::Sptr demoBase = scene->CreateGameObject("Demo Parent");
-
-		// Box to showcase the specular material
-		GameObject::Sptr specBox = scene->CreateGameObject("Specular Object");
-		{
-			MeshResource::Sptr boxMesh = ResourceManager::CreateAsset<MeshResource>();
-			boxMesh->AddParam(MeshBuilderParam::CreateCube(ZERO, ONE));
-			boxMesh->GenerateMesh();
-
-			// Set and rotation position in the scene
-			specBox->SetPostion(glm::vec3(0, -4.0f, 1.0f));
-
-			// Add a render component
-			RenderComponent::Sptr renderer = specBox->Add<RenderComponent>();
-			renderer->SetMesh(boxMesh);
-			renderer->SetMaterial(testMaterial); 
-
-			demoBase->AddChild(specBox);
-		}
-
-		// sphere to showcase the foliage material
-		GameObject::Sptr foliageBall = scene->CreateGameObject("Foliage Sphere");
-		{
-			// Set and rotation position in the scene
-			foliageBall->SetPostion(glm::vec3(-4.0f, -4.0f, 1.0f));
-
-			// Add a render component
-			RenderComponent::Sptr renderer = foliageBall->Add<RenderComponent>();
-			renderer->SetMesh(sphere);
-			renderer->SetMaterial(foliageMaterial);
-
-			demoBase->AddChild(foliageBall);
-		}
-
-		// Box to showcase the foliage material
-		GameObject::Sptr foliageBox = scene->CreateGameObject("Foliage Box");
-		{
-			MeshResource::Sptr box = ResourceManager::CreateAsset<MeshResource>();
-			box->AddParam(MeshBuilderParam::CreateCube(glm::vec3(0, 0, 0.5f), ONE));
-			box->GenerateMesh();
-
-			// Set and rotation position in the scene
-			foliageBox->SetPostion(glm::vec3(-6.0f, -4.0f, 1.0f));
-
-			// Add a render component
-			RenderComponent::Sptr renderer = foliageBox->Add<RenderComponent>();
-			renderer->SetMesh(box);
-			renderer->SetMaterial(foliageMaterial);
-
-			demoBase->AddChild(foliageBox);
-		}
-
-		// Box to showcase the specular material
-		GameObject::Sptr toonBall = scene->CreateGameObject("Toon Object");
-		{
-			// Set and rotation position in the scene
-			toonBall->SetPostion(glm::vec3(-2.0f, -4.0f, 1.0f));
-
-			// Add a render component
-			RenderComponent::Sptr renderer = toonBall->Add<RenderComponent>();
-			renderer->SetMesh(sphere);
-			renderer->SetMaterial(toonMaterial);
-
-			demoBase->AddChild(toonBall);
-		}
-
-		GameObject::Sptr displacementBall = scene->CreateGameObject("Displacement Object");
-		{
-			// Set and rotation position in the scene
-			displacementBall->SetPostion(glm::vec3(2.0f, -4.0f, 1.0f));
-
-			// Add a render component
-			RenderComponent::Sptr renderer = displacementBall->Add<RenderComponent>();
-			renderer->SetMesh(sphere);
-			renderer->SetMaterial(displacementTest);
-
-			demoBase->AddChild(displacementBall);
-		}
-
-		GameObject::Sptr multiTextureBall = scene->CreateGameObject("Multitextured Object");
-		{
-			// Set and rotation position in the scene 
-			multiTextureBall->SetPostion(glm::vec3(4.0f, -4.0f, 1.0f));
-
-			// Add a render component 
-			RenderComponent::Sptr renderer = multiTextureBall->Add<RenderComponent>();
-			renderer->SetMesh(sphere);
-			renderer->SetMaterial(multiTextureMat);
-
-			demoBase->AddChild(multiTextureBall);
-		}
-
-		GameObject::Sptr normalMapBall = scene->CreateGameObject("Normal Mapped Object");
-		{
-			// Set and rotation position in the scene 
-			normalMapBall->SetPostion(glm::vec3(6.0f, -4.0f, 1.0f));
-
-			// Add a render component 
-			RenderComponent::Sptr renderer = normalMapBall->Add<RenderComponent>();
-			renderer->SetMesh(sphere);
-			renderer->SetMaterial(normalmapMat);
-
-			demoBase->AddChild(normalMapBall);
-		}
 		*/
+
 		// Background and forground vehicles\\
 		Give these Parents for Foreground/Background Blocks if we have enough objects to do that with!
 DefaultSceneLayer::SpawnBackGroundCar(scene, Car1Mesh, Car1Material, "Car1", glm::vec3(14.870f, 7.80f, 2.7f), glm::vec3(90.0f, 0.0f, -90.0f), glm::vec3(0.250f, 0.250f, 0.250f));
